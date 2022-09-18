@@ -1,0 +1,51 @@
+.login-page-details{
+    background-image: url(../img/lathback.jpg);
+    }
+    .common-color{
+        color:#ff0000;;
+    }
+    .common-color:hover{
+        
+        color: #202946;
+    }
+    .common-btn {
+        background: #ff0000;
+    }
+    .bg-org-doc.active{
+        background: #ff0000;
+    }
+    .common-btn:focus,
+    .common-btn:hover {
+        background: #202946;
+    }
+    .bg-blue{
+        background: #202946;
+    }
+    .blue-btn{
+        background: #202946;
+        padding: 8px 24px;
+        text-align: center;
+        color: #fff;
+        display: inline-block;
+        border-radius: 12px;
+        margin: 0px 10px;
+    }
+    .addcupon-rit.text-right > button{
+        float: right;
+    }
+    .border-0.p-6.rounded-xl.shadow-xl.flex.flex-col.w-full.bg-white.outline-none.focus\:outline-none {
+        min-width: 500px;
+        max-width: 100%;
+    }
+    table tr td .w-40 img {
+        width: 50px;
+        height: 50px;
+    }
+    .border-1{
+        border-bottom: 1px solid #e0e0e0;
+    }
+@media (max-width:767px) {
+    .login-page-details {
+        margin-left: 0px !important;
+    }
+}
