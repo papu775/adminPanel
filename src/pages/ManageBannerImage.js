@@ -9,13 +9,14 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddBannerImageModal from 'components/AddBannerImageModal';
 import Switch from "react-switch";
+import swal from "sweetalert";
 
 import {
   getBannerDetails,
   changeBannerImageStatus,
   deleteBannerImage,
 } from "../api/bannerImage";
-import swal from "sweetalert";
+
 
 toast.configure()
 
@@ -201,10 +202,10 @@ const onClose = () => {
 </td> */}
 
 
-<td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left"
+            <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left"
                 id={`${ele._id}`}>
 <Switch onChange={e => TOGGLE_STATUS(e, ele._id, ele.isActive === true ? false:true)} checked={ele.isActive === true ? true:false} />
-                </td>
+            </td>
               
               <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                 <Button

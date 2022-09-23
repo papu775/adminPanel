@@ -21,6 +21,11 @@ import ManageBannerImage from 'pages/ManageBannerImage';
 import ManageFaq from 'pages/ManageFaq';
 import AddCoupon from 'pages/AddCoupon';
 import EditCoupon from 'pages/EditCoupon';
+import ManageCommission from 'pages/ManageCommission';
+import ManageCategory from 'pages/ManageCategory';
+import AddCategory from 'pages/AddCategory';
+import EditCategory from 'pages/EditCategory';
+import ManageRoyalty from 'pages/ManageRoyalty';
 // import ForgotPassword from 'pages/forgotPassword';
 // import ManageSupport from 'pages/ManageSupport';
 // import SpinnerComponent from 'components/Spinner';
@@ -111,6 +116,26 @@ function App() {
                     <Route exact path="/add-coupon">
                         <Sidebar admin={admin} />
                         <AddCoupon />
+                    </Route>
+                    <Route exact path="/manage-commission">
+                        <Sidebar admin={admin} />
+                        <ManageCommission />
+                    </Route>
+                    <Route exact path="/manage-category">
+                        <Sidebar admin={admin} />
+                        <ManageCategory />
+                    </Route>
+                    <Route exact path="/add-category">
+                        <Sidebar admin={admin} />
+                        <AddCategory />
+                    </Route>
+                    <Route exact path="/edit-category/:id">
+                        <Sidebar admin={admin} />
+                        <EditCategory />
+                    </Route>
+                    <Route exact path="/manage-royalty">
+                        <Sidebar admin={admin} />
+                        <ManageRoyalty />
                     </Route>
                     <Route exact path="/manage-contactus" setIsLoading={setIsLoading}>
                         <Sidebar admin={admin} />

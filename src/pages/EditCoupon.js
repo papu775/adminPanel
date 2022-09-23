@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState } from 'react'
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { DateRangePicker } from 'rsuite';
-import { editCoupon, getcoupon } from '../api/coupon';
+import { editCoupon } from '../api/coupon';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -64,27 +64,27 @@ const EditCoupon = () => {
             console.log(error);
         }
     }
-    const FETCH_COUPON = async () => {
-        try {
-            const res = await getcoupon(id);
-            console.log(res.data.data);
-            setCouponName(res.data.data.couponName);
-            setDiscountType(res.data.data.discountType)
-            setCouponCode(res.data.data.couponCode);
-            setNoOfCoupon(res.data.data.noOfCoupon);
-            setEveryPersonUsed(res.data.data.everyPersonUsed);
-            setDiscountAmount(res.data.data.discountAmount);
-            setStartDate(new Date(res.data.data.startDate));
-            setEndDate(new Date(res.data.data.endDate));
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    useEffect(() => {
-        FETCH_COUPON();
-        // alert("");
-        console.log(new Date("2022-09-09T08:52:15.720Z"));
-    }, [])
+    // const FETCH_COUPON = async () => {
+    //     try {
+    //         const res = await getcoupon(id);
+    //         console.log(res.data.data);
+    //         setCouponName(res.data.data.couponName);
+    //         setDiscountType(res.data.data.discountType)
+    //         setCouponCode(res.data.data.couponCode);
+    //         setNoOfCoupon(res.data.data.noOfCoupon);
+    //         setEveryPersonUsed(res.data.data.everyPersonUsed);
+    //         setDiscountAmount(res.data.data.discountAmount);
+    //         setStartDate(new Date(res.data.data.startDate));
+    //         setEndDate(new Date(res.data.data.endDate));
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+    // useEffect(() => {
+    //     FETCH_COUPON();
+    //     // alert("");
+    //     // console.log(new Date("2022-09-09T08:52:15.720Z"));
+    // }, [])
     return (
         <>
             {/* {startCheck && <CheckLogin isLoggedIn={isLoggedIn} />} */}

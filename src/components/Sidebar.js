@@ -257,12 +257,32 @@ export default function Sidebar({ admin }) {
                            </li>
                            <li className="rounded-lg mb-2">
                                 <NavLink
-                                    to="/manage-subscription"
+                                    to="/manage-commission"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     activeClassName="bg-orange-900  text-white shadow-md active"
                                 >
-                                    <Icon name="payment" size="2xl" />
-                                    Manage Subscription 
+                                    <Icon name="money" size="2xl" />
+                                    Manage Commission
+                                </NavLink>
+                           </li>
+                           <li className="rounded-lg mb-2">
+                                <NavLink
+                                    to="/manage-category"
+                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                >
+                                    <Icon name="category" size="2xl" />
+                                    Manage Category
+                                </NavLink>
+                           </li>
+                           <li className="rounded-lg mb-2">
+                                <NavLink
+                                    to="/manage-royalty"
+                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                >
+                                    <Icon name="category" size="2xl" />
+                                    Manage Royalty
                                 </NavLink>
                            </li>
 

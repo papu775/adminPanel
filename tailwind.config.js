@@ -1,6 +1,6 @@
 module.exports = {
     mode: 'jit',
-    purge: ['./src/**/*.js', './public/index.html'],
+    purge: ['./src/**/*.js', './public/index.html',"./node_modules/flowbite/**/*.js"],
     darkMode: false, // or 'media' or 'class'
     theme: {
         fontFamily: {
@@ -13,5 +13,7 @@ module.exports = {
     variants: {
         extend: {},
     },
-    plugins: [],
+    plugins: [
+        require('flowbite/plugin')
+    ],
 };
