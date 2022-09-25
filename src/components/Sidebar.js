@@ -6,53 +6,26 @@ import H6 from '@material-tailwind/react/Heading6';
 // import logo from "../../src/assets/img/logo.png"
 import Image from '@material-tailwind/react/Image';
 
-
 const navigationList = [
     {
         id: 'manage-cms',
         text: 'Manage Cms',
         icon: 'expand',
     },
-//     // {
-//     //     id: 'manage-distributors',
-//     //     text: 'Manage Distributors',
-//     //     icon: 'person',
-//     // },
-//     // {
-//     //     id: 'manage-jobs',
-//     //     text: 'Manage Jobs',
-//     //     icon: 'work',
-//     // },
-//     // {
-//     //     id: 'manage-reports',
-//     //     text: 'Manage Reports',
-//     //     icon: 'report',
-//     // },
-//     // {
-//     //     id: 'chat',
-//     //     text: 'Chat',
-//     //     icon: 'chat',
-//     // },
-//     // {
-//     //     id: 'manage-support',
-//     //     text: 'Manage Contact Us',
-//     //     icon: 'email',
-//     // },
-//     // {
-//     //     id: 'active-jobs',
-//     //     text: 'Distributor Map View',
-//     //     icon: 'map',
-//     // },
-//     // {
-//     //     id: 'manage-sub-admins',
-//     //     text: 'Manage Sub Admins',
-//     //     icon: 'groups'
-//     // }
+];
+
+const navigationListHome = [
+    {
+        id: 'manage-home',
+        text: 'Manage Home',
+        icon: 'home',
+    },
 ];
 
 export default function Sidebar({ admin }) {
     const [showSidebar, setShowSidebar] = useState('-left-64');
     const [isCmsDropDownActive, setIsCmsDropDownActive] = useState(false);
+    const [isHomeDropDownActive, setIsHomeDropDownActive] = useState(false);
     // const [navigationList, setNavigationList] = useState([]);
 
     // const getNavigationList = () => {
@@ -78,6 +51,15 @@ export default function Sidebar({ admin }) {
         switch (activeDropDownClassId) {
             case 'manage-cms-dropdown': {
                 setIsCmsDropDownActive(!isCmsDropDownActive);
+                return;
+            }
+            default :{}
+        }
+    };
+    const toggleClassHome = (activeDropDownClassId) => {
+        switch (activeDropDownClassId) {
+            case 'manage-home-dropdown': {
+                setIsHomeDropDownActive(!isHomeDropDownActive);
                 return;
             }
             default :{}
@@ -115,23 +97,91 @@ export default function Sidebar({ admin }) {
                                     exact
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     activeClassName="bg-orange-900 text-white shadow-md active"
-                                    
                                 >
                                     <Icon name="dashboard" size="2xl" />
                                     Dashboard
                                 </NavLink>
                             </li>
-                            <li className="rounded-lg mb-4">
+                            <li className="rounded-lg mb-2">
                                 <NavLink
                                     to="/manage-profile"
-                                    exact
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900 text-white shadow-md active"
+                                    activeClassName="bg-orange-900  text-white shadow-md active"
                                 >
                                     <Icon name="person" size="2xl" />
                                     Manage Profile
                                 </NavLink>
-                            </li>                     
+                            </li>
+                            {
+                                navigationListHome.length > 0
+                                &&
+                                navigationListHome.map((item, index) => (
+                                    <div key={index}>
+                                        {
+                                            item.id === 'manage-home'
+                                                ?
+                                                <>
+                                                    <li
+                                                        onClick={() => toggleClassHome("manage-home-dropdown")}
+                                                        className="rounded-lg mb-4 flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg cursor-pointer"
+                                                        // className="flex items-center gap-4 text-sm text-white font-light px-4 mb-3 py-3 rounded-lg"
+                                                        // activeClassName="bg-orange-900 text-white shadow-md active"
+                                                    >
+                                                        <Icon name="home" size="2xl" /> Manage HOME
+                                                    </li>
+                                                    <div
+                                                        id="manage-home-dropdown"
+                                                        className={
+                                                            isHomeDropDownActive ? "pl-3" : "hidden pl-3"
+                                                        }
+                                                    >
+                                                        <li className="rounded-lg mb-2">
+                                                            <NavLink
+                                                                to="/manage-bannerimage"
+                                                                className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                                                activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
+                                                            >
+                                                                <Icon name="topic" size="2xl" />
+                                                                Manage Banner Image
+                                                            </NavLink>
+                                                        </li>
+                                                        <li className="rounded-lg mb-2">
+                                                            <NavLink
+                                                                to="/manage-category"
+                                                                className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                                                activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
+                                                            >
+                                                                <Icon name="topic" size="2xl" />
+                                                                Manage Category
+                                                            </NavLink>
+                                                        </li>
+                                                        <li className="rounded-lg mb-2">
+                                                            <NavLink
+                                                                to="/manage-royalty"
+                                                                className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                                                activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
+                                                            >
+                                                                <Icon name="topic" size="2xl" />
+                                                                Manage Royalty
+                                                            </NavLink>
+                                                        </li>
+                                                    </div>
+                                                </>
+                                                :
+                                                <li className="rounded-lg mb-2">
+                                                    <NavLink
+                                                        to={`/${item.id}`}
+                                                        className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                                        activeClassName="bg-orange-900  text-white shadow-md active"
+                                                    >
+                                                        <Icon name={item.icon} size="2xl" />
+                                                        {item.text}
+                                                    </NavLink>
+                                                </li>
+                                        }
+                                    </div>
+                                ))
+                            }
                             {
                                 navigationList.length > 0
                                 &&
@@ -189,16 +239,6 @@ export default function Sidebar({ admin }) {
                                                         </li>
                                                         <li className="rounded-lg mb-2">
                                                             <NavLink
-                                                                to="/manage-bannerimage"
-                                                                className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                                                activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
-                                                            >
-                                                                <Icon name="topic" size="2xl" />
-                                                                Manage Banner Image
-                                                            </NavLink>
-                                                        </li>
-                                                        <li className="rounded-lg mb-2">
-                                                            <NavLink
                                                                 to="/manage-faq"
                                                                 className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                                                 activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
@@ -224,28 +264,7 @@ export default function Sidebar({ admin }) {
                                     </div>
                                 ))
                             }
-                        
                             <li className="rounded-lg mb-2">
-                                <NavLink
-                                    to="/manage-coupon"
-                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
-                                >
-                                    <Icon name="gif" size="2xl" />
-                                    Manage Coupon
-                                </NavLink>
-                           </li>
-                           <li className="rounded-lg mb-2">
-                                <NavLink
-                                    to="/manage-subscription"
-                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
-                                >
-                                    <Icon name="payment" size="2xl" />
-                                    Manage Subscription 
-                                </NavLink>
-                           </li>
-                           <li className="rounded-lg mb-2">
                                 <NavLink
                                     to="/manage-contactus"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
@@ -255,65 +274,24 @@ export default function Sidebar({ admin }) {
                                     Manage Contact Us
                                 </NavLink>
                            </li>
-                           <li className="rounded-lg mb-2">
+                            <li className="rounded-lg mb-2">
                                 <NavLink
-                                    to="/manage-commission"
+                                    to="/manage-contactinfo" 
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     activeClassName="bg-orange-900  text-white shadow-md active"
                                 >
-                                    <Icon name="money" size="2xl" />
-                                    Manage Commission
+                                    <Icon name="phone" size="2xl" />
+                                    Manage Contact Info
                                 </NavLink>
                            </li>
                            <li className="rounded-lg mb-2">
                                 <NavLink
-                                    to="/manage-category"
+                                    to="/manage-coupon"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     activeClassName="bg-orange-900  text-white shadow-md active"
                                 >
-                                    <Icon name="category" size="2xl" />
-                                    Manage Category
-                                </NavLink>
-                           </li>
-                           <li className="rounded-lg mb-2">
-                                <NavLink
-                                    to="/manage-royalty"
-                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
-                                >
-                                    <Icon name="category" size="2xl" />
-                                    Manage Royalty
-                                </NavLink>
-                           </li>
-
-                     {/*      <li className="rounded-lg mb-2">
-                                <NavLink
-                                    to="/license-information"
-                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
-                                >
-                                    <Icon name="person" size="2xl" />
-                                    License information
-                                </NavLink>
-                           </li>
-                           <li className="rounded-lg mb-2">
-                                <NavLink
-                                    to="/manage-commission"
-                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
-                                >
-                                    <Icon name="person" size="2xl" />
-                                    Manage Commission
-                                </NavLink>
-                           </li>
-                           <li className="rounded-lg mb-2">
-                                <NavLink
-                                    to="/view-images"
-                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
-                                >
-                                    <Icon name="image" size="2xl" />
-                                    View Images
+                                    <Icon name="gif" size="2xl" />
+                                    Manage Coupon
                                 </NavLink>
                            </li>
                            <li className="rounded-lg mb-2">
@@ -334,6 +312,46 @@ export default function Sidebar({ admin }) {
                                 >
                                     <Icon name="person" size="2xl" />
                                     Manage Contributor 
+                                </NavLink>
+                           </li>
+                           <li className="rounded-lg mb-2">
+                                <NavLink
+                                    to="/manage-subscription"
+                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                >
+                                    <Icon name="payment" size="2xl" />
+                                    Manage Subscription 
+                                </NavLink>
+                           </li>
+                           <li className="rounded-lg mb-2">
+                                <NavLink
+                                    to="/manage-commission"
+                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                >
+                                    <Icon name="money" size="2xl" />
+                                    Manage Commission
+                                </NavLink>
+                           </li>
+                           <li className="rounded-lg mb-2">
+                                <NavLink
+                                    to="/license-information"
+                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                >
+                                    <Icon name="person" size="2xl" />
+                                    License information
+                                </NavLink>
+                           </li>
+                           <li className="rounded-lg mb-2">
+                                <NavLink
+                                    to="/view-images"
+                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                >
+                                    <Icon name="image" size="2xl" />
+                                    View Images
                                 </NavLink>
                            </li>
                            <li className="rounded-lg mb-2">
@@ -375,7 +393,7 @@ export default function Sidebar({ admin }) {
                                     <Icon name="report" size="2xl" />
                                     Manage Report  
                                 </NavLink>
-                           </li> */}
+                           </li>
                         </ul>
                     </div>
                 </div>

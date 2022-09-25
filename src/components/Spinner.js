@@ -11,6 +11,7 @@ const override = {
 const SpinnerComponent = ({ isLoading }) => {
     return (
         <>
+           
             <PulseLoader color={'#e65100'} loading={isLoading} cssOverride={override} size={30} />
         </>
     );

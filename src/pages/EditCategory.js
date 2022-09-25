@@ -13,7 +13,7 @@ const EditCategory = () => {
     const { id } = useParams();
     const history = useHistory();
     const [file, setFile] = useState();
-    const [fileData,setFileData] = useState();
+    // const [fileData,setFileData] = useState();
     // const [categoryData,setCategoryData] = useState({});
     const {
       register,
@@ -25,7 +25,7 @@ const EditCategory = () => {
     } = useForm();
     function handleChange(e) {
       console.log(e.target.files);
-      setFileData(e.target.files);
+      // setFileData(e.target.files);
       setFile(URL.createObjectURL(e.target.files[0]));
     }
 
@@ -46,9 +46,9 @@ const EditCategory = () => {
 
     useEffect(()=>{
         GET_CATEGORY_BY_ID();
-    },[])
+    })
   
-    const EDIT_CATEGORY = async (data) => {
+    const EDIT_CATEGORY = async () => {
       try {    
         const form = document.getElementById("edit-category");
         const formData = new FormData(form);

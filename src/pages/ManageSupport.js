@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
-
+// import { NavLink } from 'react-router-dom';
 import {
     getSupportList,
     deleteSupport,
-    // changeSupportStatus,
     sendEmail
 } from '../api/support';
 import { toast } from 'react-toastify';
@@ -15,23 +14,24 @@ import Button from '@material-tailwind/react/Button';
 import Icon from '@material-tailwind/react/Icon';
 import Modal from '../components/Modal'
 import Pagination from '../components/Pagination';
-
+import SpinnerComponent from 'components/Spinner';
 
 toast.configure()
 
-const ManageSupport = ({ setIsLoading }) => {
+const ManageSupport = () => {
     const [queries, setQueries] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [selectedData, setSelectedData] = useState({});
     const [emailData, setEmailData] = useState({})
 
     //Pagination
-    // const [itemsLimit, setItemsLimit] = useState(10);
     const itemsLimit = 10;
+    // const [itemsLimit, setItemsLimit] = useState(10);
     const [pageIndex, setPageIndex] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [pointer, setPointer] = useState(1);
     const [items, setItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handlePageClick = ({ pageIndex, isSetPointer = true }) => {
         if (isSetPointer) setPointer(pageIndex);
@@ -78,8 +78,8 @@ const ManageSupport = ({ setIsLoading }) => {
     }
 
     useEffect(() => {
-        FETCH_LIST();
-    })
+        FETCH_LIST()
+    },[])
 
     const DELETE_ITEM = async (e, id) => {
         try {
@@ -117,6 +117,7 @@ const ManageSupport = ({ setIsLoading }) => {
                 subject: emailData.subject || 'Lethustock Contact Us',
                 message: emailData.message
             })
+            console.log(res);
             if (!res.ok) {
                 setIsLoading(false);
                 return toast.error('Error Sending Email!')
@@ -152,9 +153,10 @@ const ManageSupport = ({ setIsLoading }) => {
     //         console.error(err);
     //     }
     // }
-
+    // md:ml-64 overlay
     return (
         <>
+        {isLoading && <SpinnerComponent isLoading={isLoading} />}
             <div className="bg-white px-3 md:px-8 h-40" />
             <div className="px-3 md:px-8 h-auto -mt-24">
                 <Card>
@@ -199,7 +201,7 @@ const ManageSupport = ({ setIsLoading }) => {
                                         items.length > 0
                                         &&
                                         items.map((item, i) => (
-                                            <tr id={`row-${item._id}`}>
+                                            <tr id={`row-${item._id}`} key={i}>
                                                 <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                                                     {(i + 1) + ((pageIndex - 1) * itemsLimit)}
                                                 </th>

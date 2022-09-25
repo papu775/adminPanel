@@ -115,7 +115,7 @@ const ManageFaq = () => {
           </CardHeader>
           <CardBody>
             <div className="overflow-x-auto text-right addcupon-rit">
-              <Button className="btn-blue" onClick={OPEN_MODAL}>
+              <Button className="btn-blue bg-blue" onClick={OPEN_MODAL}>
                 Add FAQ
               </Button>
               <table className="items-center w-full bg-transparent border-collapse">

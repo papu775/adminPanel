@@ -15,13 +15,12 @@ import { checkLoginStatus } from "../utils/services/index";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { createJob } from "api/job";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
-import { addCoupon } from "../api/coupon";
-import DatePicker from "react-datepicker";
+// import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+// import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+// import { addCoupon } from "../api/coupon";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { createSubscription } from "../api/subscription";
 
@@ -53,7 +52,7 @@ const AddSubscription = () => {
   const [day,setDay] = useState("");
   const [validity,setValidity] = useState("");
   const [validitys,setValiditys] = useState([]);
-  const [cost,setCost] = useState();
+  const [cost,setCost] = useState("");
   const [feature,setFeature] = useState("");
   const [features,setFeatures] = useState([]);
   const [category, setCategory] = useState("");
@@ -68,7 +67,7 @@ const AddSubscription = () => {
         setValidity("1 month (30 days)");
      }else if(type==='Paid'){
         setCost(29);
-        setValidity("");
+     
      }
   }
 
@@ -91,23 +90,22 @@ const AddSubscription = () => {
       setFeatures(features.filter(ele=>ele !== features[indexNumber]));
   }
 
-  const ADD_VALIDIY = (e)=>{
-    e.preventDefault();
-    // setValiditys([...validitys,`${subscriptionTypeText}-US$ ${cost}/${validity}`]);
-    setValiditys([...validitys,{subscriptionTypeText,cost,day}])
-    setValidity("");
-  }
+  // const ADD_VALIDIY = (e)=>{
+  //   e.preventDefault();
+  //   // setValiditys([...validitys,`${subscriptionTypeText}-US$ ${cost}/${validity}`]);
+  //   setValiditys([...validitys,{subscriptionTypeText,cost,day}])
+  //   setValidity("");
+  // }
 
 
   const TYPES_OF_SUBSCRIPTION = (e)=>{
      e.preventDefault();
-     TypesOfSubscription.push({features,day,subscriptionTypeText,type,cost});
-     setTypesOfSubscription(TypesOfSubscription);
-     setCost(29);
-     setFeatures([]);
-     setSubscriptionTypeText("");
-     setDay("");
-     
+     setTypesOfSubscription([...TypesOfSubscription,{features,day,subscriptionTypeText,type,cost}]);
+    //  setFeatures([]);  
+    //  setCost("");
+    //  setValidity("");
+    //  setDay("");
+    //  setType("");
   }
 
   const DELETE_TYPES_OF_SUBSCRIPTION = (e,indexNumber)=>{
@@ -119,7 +117,7 @@ const AddSubscription = () => {
   const ADD_SUBSCRIPTION = async (e) => {
     e.preventDefault();
      try {
-        const res = await createSubscription({title,category,upperText,bottomText,TypesOfSubscription});
+        const res = await createSubscription({subscriptionTypeText,title,category,upperText,bottomText,TypesOfSubscription});
         console.log(res);
         if(res.ok){
             toast.success(res.data.msg);
@@ -135,13 +133,13 @@ const AddSubscription = () => {
 
 
 
-  useEffect(() => {
-    checkLoginStatus(setIsLoggedIn, setStartCheck);
-  }, [location]);
+  // useEffect(() => {
+  //   checkLoginStatus(setIsLoggedIn, setStartCheck);
+  // }, [location]);
 
   return (
     <>
-      {startCheck && <CheckLogin isLoggedIn={isLoggedIn} />}
+      {/* {startCheck && <CheckLogin isLoggedIn={isLoggedIn} />} */}
       <div className="bg-white px-3 md:px-8 h-40" />
       <div className="px-3 md:px-8 h-auto -mt-24">
         <Card>
@@ -184,6 +182,16 @@ const AddSubscription = () => {
                     />
                   </div>
                   <div className="w-full lg:w-12/12 pr-4 mb-10 font-light">
+                    <Input
+                      type="text"
+                      color="purple"
+                      placeholder={"Subscription Bottom Text"}
+                      name="bottomText"
+                      onChange={(e) => setBottomText(e.target.value)}
+                    />
+                  </div>
+                  <div className="w-full lg:w-6/12 ">
+                  <div className="pr-4 mb-10 font-light">
                     <div className="flex">
                   <Input
                     type="text"
@@ -222,16 +230,7 @@ const AddSubscription = () => {
                       })
                    }
                   </div>
-                  <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                    <Input
-                      type="text"
-                      color="purple"
-                      placeholder={"Subscription Bottom Text"}
-                      name="bottomText"
-                      onChange={(e) => setBottomText(e.target.value)}
-                    />
-                  </div>
-                  <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                  <div className="pr-4 mb-10 font-light">
                     <select
                       className="w-full h-full text-gray-800 leading-normal shadow-none outline-none focus:outline-none focus:ring-0 focus:text-gray-800 px-0 false mt-input-purple-500 mt-input bg-transparent border-none undefined undefined border-1"
                       onChange={(e) => setType(e.target.value)}
@@ -241,7 +240,7 @@ const AddSubscription = () => {
                       <option value="Paid">Paid</option>
                     </select>
                   </div>
-                  <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                  <div className="pr-4 mb-10 font-light">
                     <Input
                       type="text"
                       color="purple"
@@ -251,7 +250,7 @@ const AddSubscription = () => {
                       onChange={(e) => setSubscriptionTypeText(e.target.value)}
                     />
                   </div>
-                  <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                  <div className="pr-4 mb-10 font-light">
                     <Input
                       type="number"
                       color="purple"
@@ -261,14 +260,14 @@ const AddSubscription = () => {
                       value={cost}
                     />
                   </div>
-                  <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                  <div className="pr-4 mb-10 font-light">
                     <div className="flex">
                     <select
                       className="w-full h-full text-gray-800 leading-normal shadow-none outline-none focus:outline-none focus:ring-0 focus:text-gray-800 px-0 false mt-input-purple-500 mt-input bg-transparent border-none undefined undefined border-1"
                       onChange={(e) => setDay(e.target.value)}
                     >
-                      <option selected>Subscription Validity</option>
-                      <option value="1 month (30 days)">
+                      <option selected value="">Subscription Validity</option>
+                      <option value="1 month (30 days)" selected="false">
                          1 month (30 days)
                       </option>
                       <option value="2 month (60 days)">
@@ -303,6 +302,7 @@ const AddSubscription = () => {
                    </Button>
                    </div>
 
+                  </div>
                   </div>
                   <div className="w-full lg:w-12/12 pr-4 mb-10 font-light">
                   {

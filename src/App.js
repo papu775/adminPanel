@@ -15,7 +15,7 @@ import ManageAboutUs from 'pages/ManageAboutUs';
 import ManageCoupon from 'pages/ManageCoupon';
 import ManagePrivacyPolicy from 'pages/ManagePrivacyPolicy';
 import ManageTermsAndConditions from 'pages/ManageTermsAndConditions';
-import SpinnerComponent from 'components/Spinner';
+// import SpinnerComponent from 'components/Spinner';
 import ManageSupport from 'pages/ManageSupport';
 import ManageBannerImage from 'pages/ManageBannerImage';
 import ManageFaq from 'pages/ManageFaq';
@@ -26,9 +26,15 @@ import ManageCategory from 'pages/ManageCategory';
 import AddCategory from 'pages/AddCategory';
 import EditCategory from 'pages/EditCategory';
 import ManageRoyalty from 'pages/ManageRoyalty';
+import ManageContributor from 'pages/ManageContributor';
+import ManageCustomer from 'pages/ManageCustomer';
+import ManageUsers from 'pages/ManageUsers';
+import ManageContactInfo from 'pages/ManageContactInfo';
+import ManageSubscription from 'pages/ManageSubscription';
+import AddSubscription from 'pages/AddSubscription';
 // import ForgotPassword from 'pages/forgotPassword';
 // import ManageSupport from 'pages/ManageSupport';
-// import SpinnerComponent from 'components/Spinner';
+
 // import ManageFaq from 'pages/ManageFaq';
 // import ManageBannerImage from 'pages/ManageBannerImage';
 // import ManageCategory from 'pages/ManageCategory';
@@ -44,7 +50,7 @@ import ManageRoyalty from 'pages/ManageRoyalty';
 function App() {
     const [admin, setAdmin] = useState({});
     const [isProfileUpdated, setIsProfileUpdated] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    
     const getAdmin = () => {
         try {
             const adminData = localStorage.getItem('lethustock-admin-data')
@@ -71,8 +77,9 @@ function App() {
     //     }
     // }
     return (
+        // md:ml-64 overlay
         <>
-            <div className={isLoading ? "md:ml-64 overlay" : "md:ml-64"}>
+            <div className="md:ml-64">
                 <Switch>
                     <Route exact path="/">
                         <Login setAdmin={setAdmin} />
@@ -113,6 +120,18 @@ function App() {
                         <Sidebar admin={admin}/>
                         <EditCoupon />
                     </Route>
+                    <Route exact path="/manage-contributor">
+                        <Sidebar admin={admin} />
+                        <ManageContributor />
+                    </Route>
+                    <Route exact path="/manage-customer">
+                        <Sidebar admin={admin} />
+                        <ManageCustomer />
+                    </Route>
+                    <Route exact path="/manage-users">
+                        <Sidebar admin={admin} />
+                        <ManageUsers />
+                    </Route>
                     <Route exact path="/add-coupon">
                         <Sidebar admin={admin} />
                         <AddCoupon />
@@ -137,15 +156,27 @@ function App() {
                         <Sidebar admin={admin} />
                         <ManageRoyalty />
                     </Route>
-                    <Route exact path="/manage-contactus" setIsLoading={setIsLoading}>
+                    <Route exact path="/manage-contactus">
                         <Sidebar admin={admin} />
                         <ManageSupport />
+                    </Route>
+                    <Route exact path="/manage-contactinfo">
+                        <Sidebar admin={admin} />
+                        <ManageContactInfo />
+                    </Route>
+                    <Route exact path="/add-subscription">
+                        <Sidebar admin={admin} />
+                        <AddSubscription />
+                    </Route>
+                    <Route exact path="/manage-subscription">
+                        <Sidebar admin={admin} />
+                        <ManageSubscription />
                     </Route>
                     <Redirect from="*" to="/" />
                 </Switch>
                 <Footer />
             </div>
-            <SpinnerComponent isLoading={isLoading} />
+            
         </>
     );
 }

@@ -4,19 +4,11 @@ import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { categoryList, categoryStatus, deleteCategory } from "../api/category";
-import Switch from "react-switch";
-import { NavLink, useHistory } from "react-router-dom";
-import swal from "sweetalert";
-import Button from '@material-tailwind/react/Button';
-import Icon from '@material-tailwind/react/Icon';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Checkbox from "@material-tailwind/react/Checkbox"
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import { useForm } from "react-hook-form";
 import Input from '@material-tailwind/react/Input';
-import { addRoyalty,editRoyalty,getRoyalty } from "../api/royalty";
-import { setSyntheticLeadingComments } from "typescript";
+import { addRoyalty,getRoyalty } from "../api/royalty";
+
 
 
 const ManageRoyalty = () => {
@@ -37,7 +29,6 @@ const FETCH_ROYALTY = async ()=>{
 
 useEffect(()=>{
     FETCH_ROYALTY();
-    console.log(title);
 },[]);
 
 const Edit_Royalty = async (e)=>{

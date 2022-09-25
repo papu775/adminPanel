@@ -12,7 +12,7 @@ const changeBannerImageStatus = (id, status) => client.patch(`/admin/bannerImage
 const deleteBannerImage = (id) => client.delete(`/admin/deleteBannerImage/${id}`)
 
 // const deleteBannerCoverPic = (index) => client.delete(`/admin/banner/coverPic/${index}`)
-
+const editBannertext = (data) => client.post(`/admin/editBannertext`, data)
 export {
     uploadBannerData,
     // uploadBannerVideo,
@@ -22,4 +22,5 @@ export {
     // updateBannerCoverPic,
     deleteBannerImage,
     // deleteBannerCoverPic
+    editBannertext
 }
