@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Checkbox from "@material-tailwind/react/Checkbox"
 import Button from '@material-tailwind/react/Button';
 import Icon from '@material-tailwind/react/Icon';
@@ -35,7 +35,7 @@ const UserList = ({ users, ACTIVATE_DEACTIVATE_ACCOUNT, moveToDetailsPage }) => 
                                 color="green"
                                 text="Active"
                                 id={`checkbox-${i}`}
-                                defaultChecked={user.status == 'Activated'}
+                                defaultChecked={user.status === 'Activated'}
                                 onChange={e => ACTIVATE_DEACTIVATE_ACCOUNT(e, user._id)}
                             />
                         </td>

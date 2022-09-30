@@ -7,7 +7,9 @@ const categoryList = () => client.get('/admin/categoryList')
 const categoryStatus = (id, status) => client.patch(`/admin/categoryStatus/${id}/${status}`, {})
 const deleteCategory = (id) => client.delete(`/admin/deletecategory/${id}`)
 const editCategory = (id, data) => client.put(`/admin/editCategory/${id}`, data);
-const getCategoryById = (id) =>client.get(`/admin/getCategoryById/${id}`)
+const getCategoryById = (id) =>client.get(`/admin/getCategoryById/${id}`);
+const editCategoryHeading = (data)=>client.post(`/admin/editCategoryHeading`,data);
+const getCategoryHeading = ()=>client.get(`/admin/getCategoryHeading`);
 
 export {
     // getAllUserCommissionByUser,
@@ -18,7 +20,9 @@ export {
     categoryStatus,
     deleteCategory,
     editCategory,
-    getCategoryById
+    getCategoryById,
+    editCategoryHeading,
+    getCategoryHeading
 }
 
 

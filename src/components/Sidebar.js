@@ -96,7 +96,7 @@ export default function Sidebar({ admin }) {
                                     to="/dashboard"
                                     exact
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900 text-white shadow-md active"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                 >
                                     <Icon name="dashboard" size="2xl" />
                                     Dashboard
@@ -106,7 +106,7 @@ export default function Sidebar({ admin }) {
                                 <NavLink
                                     to="/manage-profile"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                 >
                                     <Icon name="person" size="2xl" />
                                     Manage Profile
@@ -145,7 +145,7 @@ export default function Sidebar({ admin }) {
                                                                 Manage Banner Image
                                                             </NavLink>
                                                         </li>
-                                                        <li className="rounded-lg mb-2">
+                                                        {/* <li className="rounded-lg mb-2">
                                                             <NavLink
                                                                 to="/manage-category"
                                                                 className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
@@ -154,7 +154,7 @@ export default function Sidebar({ admin }) {
                                                                 <Icon name="topic" size="2xl" />
                                                                 Manage Category
                                                             </NavLink>
-                                                        </li>
+                                                        </li> */}
                                                         <li className="rounded-lg mb-2">
                                                             <NavLink
                                                                 to="/manage-royalty"
@@ -163,6 +163,26 @@ export default function Sidebar({ admin }) {
                                                             >
                                                                 <Icon name="topic" size="2xl" />
                                                                 Manage Royalty
+                                                            </NavLink>
+                                                        </li>
+                                                        <li className="rounded-lg mb-2">
+                                                            <NavLink
+                                                                to="/manage-headerend"
+                                                                className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                                                activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
+                                                            >
+                                                                <Icon name="topic" size="2xl" />
+                                                                Manage Headerend
+                                                            </NavLink>
+                                                        </li>
+                                                        <li className="rounded-lg mb-2">
+                                                            <NavLink
+                                                                to="/manage-footerstart"
+                                                                className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                                                activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
+                                                            >
+                                                                <Icon name="topic" size="2xl" />
+                                                                Manage Footerstart
                                                             </NavLink>
                                                         </li>
                                                     </div>
@@ -209,7 +229,7 @@ export default function Sidebar({ admin }) {
                                                             <NavLink
                                                                 to="/manage-aboutus"
                                                                 className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                                                activeClassName="bg-orange-900 text-white shadow-md active"
+                                                                activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                                             >
                                                                 <Icon name="topic" size="2xl" />
                                                                 Manage About Us
@@ -220,7 +240,7 @@ export default function Sidebar({ admin }) {
                                                             <NavLink
                                                                 to="/manage-termsandconditions"
                                                                 className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                                                activeClassName="bg-orange-900 text-white shadow-md active"
+                                                                activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                                             >
                                                                 <Icon name="topic" size="2xl" />
                                                                 Manage Terms & Conditions
@@ -231,7 +251,7 @@ export default function Sidebar({ admin }) {
                                                             <NavLink
                                                                 to="/manage-privacypolicy"
                                                                 className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                                                activeClassName="bg-orange-900 text-white shadow-md active"
+                                                                activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                                             >
                                                                 <Icon name="topic" size="2xl" />
                                                                 Manage Legal & Privacy Policy
@@ -268,7 +288,7 @@ export default function Sidebar({ admin }) {
                                 <NavLink
                                     to="/manage-contactus"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                 >
                                     <Icon name="email" size="2xl" />
                                     Manage Contact Us
@@ -278,17 +298,37 @@ export default function Sidebar({ admin }) {
                                 <NavLink
                                     to="/manage-contactinfo" 
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                 >
                                     <Icon name="phone" size="2xl" />
                                     Manage Contact Info
+                                </NavLink>
+                           </li>
+                            <li className="rounded-lg mb-2">
+                                <NavLink
+                                    to="/manage-socalmedia" 
+                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
+                                >
+                                    <Icon name="tv" size="2xl" />
+                                    Manage Socalmedia
+                                </NavLink>
+                           </li>
+                            <li className="rounded-lg mb-2">
+                                <NavLink
+                                    to="/manage-category" 
+                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
+                                >
+                                    <Icon name="category" size="2xl" />
+                                    Manage Category
                                 </NavLink>
                            </li>
                            <li className="rounded-lg mb-2">
                                 <NavLink
                                     to="/manage-coupon"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                 >
                                     <Icon name="gif" size="2xl" />
                                     Manage Coupon
@@ -298,7 +338,7 @@ export default function Sidebar({ admin }) {
                                 <NavLink
                                     to="/manage-customer"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                 >
                                     <Icon name="person" size="2xl" />
                                     Manage Customer
@@ -308,7 +348,7 @@ export default function Sidebar({ admin }) {
                                 <NavLink
                                     to="/manage-contributor"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                 >
                                     <Icon name="person" size="2xl" />
                                     Manage Contributor 
@@ -318,7 +358,7 @@ export default function Sidebar({ admin }) {
                                 <NavLink
                                     to="/manage-subscription"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                 >
                                     <Icon name="payment" size="2xl" />
                                     Manage Subscription 
@@ -328,10 +368,20 @@ export default function Sidebar({ admin }) {
                                 <NavLink
                                     to="/manage-commission"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
                                 >
                                     <Icon name="money" size="2xl" />
                                     Manage Commission
+                                </NavLink>
+                           </li>
+                           <li className="rounded-lg mb-2">
+                                <NavLink
+                                    to="/view-item"
+                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    activeClassName="bg-org-doc  bg-orange-900 text-white shadow-md active"
+                                >
+                                    <Icon name="image" size="2xl" />
+                                    View Item
                                 </NavLink>
                            </li>
                            <li className="rounded-lg mb-2">
@@ -340,18 +390,8 @@ export default function Sidebar({ admin }) {
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     activeClassName="bg-orange-900  text-white shadow-md active"
                                 >
-                                    <Icon name="person" size="2xl" />
+                                    <Icon name="info" size="2xl" />
                                     License information
-                                </NavLink>
-                           </li>
-                           <li className="rounded-lg mb-2">
-                                <NavLink
-                                    to="/view-images"
-                                    className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
-                                >
-                                    <Icon name="image" size="2xl" />
-                                    View Images
                                 </NavLink>
                            </li>
                            <li className="rounded-lg mb-2">
@@ -360,7 +400,7 @@ export default function Sidebar({ admin }) {
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     activeClassName="bg-orange-900  text-white shadow-md active"
                                 >
-                                    <Icon name="person" size="2xl" />
+                                    <Icon name="payment" size="2xl" />
                                     Manage Order 
                                 </NavLink>
                            </li>
@@ -370,7 +410,7 @@ export default function Sidebar({ admin }) {
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     activeClassName="bg-orange-900  text-white shadow-md active"
                                 >
-                                    <Icon name="person" size="2xl" />
+                                    <Icon name="folder" size="2xl" />
                                     Manage Invoice 
                                 </NavLink>
                            </li>

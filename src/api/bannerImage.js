@@ -13,6 +13,7 @@ const deleteBannerImage = (id) => client.delete(`/admin/deleteBannerImage/${id}`
 
 // const deleteBannerCoverPic = (index) => client.delete(`/admin/banner/coverPic/${index}`)
 const editBannertext = (data) => client.post(`/admin/editBannertext`, data)
+const getBannerText = ()=>client.get(`admin/getBannerText`);
 export {
     uploadBannerData,
     // uploadBannerVideo,
@@ -22,5 +23,6 @@ export {
     // updateBannerCoverPic,
     deleteBannerImage,
     // deleteBannerCoverPic
-    editBannertext
+    editBannertext,
+    getBannerText
 }

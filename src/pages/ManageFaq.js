@@ -15,6 +15,7 @@ import ModalFooter from "@material-tailwind/react/ModalFooter";
 import { createFaq } from "../api/faq";
 import Switch from "react-switch";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 
 toast.configure();
 
@@ -29,6 +30,7 @@ const ManageFaq = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
     trigger,
   } = useForm();
 
@@ -45,6 +47,7 @@ const ManageFaq = () => {
     try {
       e.preventDefault();
       setShowModal(true);
+      setValue('answer','');
     } catch (err) {
       console.log(err);
     }
@@ -54,12 +57,18 @@ const ManageFaq = () => {
   };
   const DELETE_ITEM = async (e, id) => {
     try {
-      e.preventDefault();
-      // setIsLoading(true);
+      e.preventDefault();     
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
       if (!id) return console.log("Query Id Is Required!");
       const res = await deleteFaqs(id);
       if (res.ok) {
-        // setIsLoading(false);
         const res = await getAllFaqs();
         setGetAllFaq(res.data.data);
         console.log(res.data.data);
@@ -67,12 +76,11 @@ const ManageFaq = () => {
       } else {
         toast.error(res.data.msg);
       }
+        }
+      });
 
-      // FETCH_LIST()
-      // setIsLoading(false);
     } catch (err) {
       console.log(err);
-      // setIsLoading(false);
     }
   };
   const TOGGLE_STATUS = async (e, id, isActive) => {
@@ -260,7 +268,7 @@ const ManageFaq = () => {
                 rows="6"
                 // value={answer}
                 // onChange={(e) => setAnswer(e.target.value)}
-                {...register("answer", { required: "Auestion is Required!" })}
+                {...register("answer", { required: "Answer is Required!" })}
                 onKeyUp={() => {
                   trigger("answer");
                 }}

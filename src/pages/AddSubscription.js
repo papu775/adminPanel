@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Card from "@material-tailwind/react/Card";
 import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
-import { Select, Option } from "@material-tailwind/react/";
+// import { Select, Option } from "@material-tailwind/react/";
 import Button from "@material-tailwind/react/Button";
 import Icon from "@material-tailwind/react/Icon";
-import Checkbox from "@material-tailwind/react/Checkbox";
-import { NavLink } from "react-router-dom";
+// import Checkbox from "@material-tailwind/react/Checkbox";
+// import { NavLink } from "react-router-dom";
 import Input from "@material-tailwind/react/Input";
-import Image from "@material-tailwind/react/Image";
-import { useLocation, Redirect } from "react-router-dom";
-import CheckLogin from "components/CheckLogin";
-import { checkLoginStatus } from "../utils/services/index";
+// import Image from "@material-tailwind/react/Image";
+// import { useLocation } from "react-router-dom";
+// import CheckLogin from "components/CheckLogin";
+// import { checkLoginStatus } from "../utils/services/index";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -43,15 +43,15 @@ toast.configure();
 // };
 
 const AddSubscription = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [startCheck, setStartCheck] = useState(false);
-  const location = useLocation();
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [startCheck, setStartCheck] = useState(false);
+  // const location = useLocation();
   const history = useHistory();
   const [title,setTitle] = useState("");
   const [type,setType]= useState("");
   const [day,setDay] = useState("");
-  const [validity,setValidity] = useState("");
-  const [validitys,setValiditys] = useState([]);
+  // const [validity,setValidity] = useState("");
+  // const [validitys,setValiditys] = useState([]);
   const [cost,setCost] = useState("");
   const [feature,setFeature] = useState("");
   const [features,setFeatures] = useState([]);
@@ -60,20 +60,20 @@ const AddSubscription = () => {
   const [bottomText, setBottomText] = useState("");
   const [subscriptionTypeText,setSubscriptionTypeText] = useState("");
   const [TypesOfSubscription,setTypesOfSubscription] = useState([]);
-  const [TypesOfSubscriptionObj,setTypesOfSubscriptionObj] = useState({});
-  const _SET_COST = ()=>{
-     if(type==='Free'){
-        setCost(0);
-        setValidity("1 month (30 days)");
-     }else if(type==='Paid'){
-        setCost(29);
+  // const [TypesOfSubscriptionObj,setTypesOfSubscriptionObj] = useState({});
+  // const _SET_COST = ()=>{
+  //    if(type==='Free'){
+  //       setCost(0);
+  //       // setValidity("1 month (30 days)");
+  //    }else if(type==='Paid'){
+  //       setCost(29);
      
-     }
-  }
+  //    }
+  // }
 
-  useEffect(()=>{
-    _SET_COST();
-  },[type])
+  // useEffect(()=>{
+  //   _SET_COST();
+  // },[type])
 
   // useEffect(()=>{
 

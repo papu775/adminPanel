@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
-import { NavLink } from 'react-router-dom';
-import Input from "@material-tailwind/react/Input"
-import { useLocation, Redirect } from 'react-router-dom';
-import CheckLogin from 'components/CheckLogin';
-import { checkLoginStatus } from '../utils/services/index';
+// import { NavLink } from 'react-router-dom';
+// import Input from "@material-tailwind/react/Input"
+// import { useLocation, Redirect } from 'react-router-dom';
+// import CheckLogin from 'components/CheckLogin';
+// import { checkLoginStatus } from '../utils/services/index';
 import { getUsers, changeAccountActiveStatus } from '../api/user'
 
 import { useHistory } from 'react-router-dom';

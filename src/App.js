@@ -32,6 +32,12 @@ import ManageUsers from 'pages/ManageUsers';
 import ManageContactInfo from 'pages/ManageContactInfo';
 import ManageSubscription from 'pages/ManageSubscription';
 import AddSubscription from 'pages/AddSubscription';
+import ManageHeaderEnd from 'pages/ManageHeaderEnd';
+import ManageFooterStart from 'pages/ManageFooterStart';
+import ManageSocalMedia from 'pages/ManageSocalMedia';
+import ViewImage from 'pages/ViewImage';
+import ShowUserById from 'pages/ShowUserById';
+import ItemDetails from 'pages/ItemDetails';
 // import ForgotPassword from 'pages/forgotPassword';
 // import ManageSupport from 'pages/ManageSupport';
 
@@ -152,6 +158,10 @@ function App() {
                         <Sidebar admin={admin} />
                         <EditCategory />
                     </Route>
+                    <Route exact path="/view-user/:id">
+                        <Sidebar admin={admin} />
+                        <ShowUserById />
+                    </Route>
                     <Route exact path="/manage-royalty">
                         <Sidebar admin={admin} />
                         <ManageRoyalty />
@@ -171,6 +181,26 @@ function App() {
                     <Route exact path="/manage-subscription">
                         <Sidebar admin={admin} />
                         <ManageSubscription />
+                    </Route>
+                    <Route exact path="/manage-headerend">
+                        <Sidebar admin={admin} />
+                        <ManageHeaderEnd />
+                    </Route>
+                    <Route exact path="/manage-footerstart">
+                        <Sidebar admin={admin} />
+                        <ManageFooterStart />
+                    </Route>
+                    <Route exact path="/manage-socalmedia">
+                        <Sidebar admin={admin} />
+                        <ManageSocalMedia />
+                    </Route>
+                    <Route exact path="/view-item">
+                        <Sidebar admin={admin} />
+                        <ViewImage />
+                    </Route>
+                    <Route exact path="/item-details/:id">
+                        <Sidebar admin={admin} />
+                        <ItemDetails />
                     </Route>
                     <Redirect from="*" to="/" />
                 </Switch>

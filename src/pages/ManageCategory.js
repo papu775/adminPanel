@@ -4,18 +4,26 @@ import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { categoryList, categoryStatus, deleteCategory } from "../api/category";
+import { categoryList, categoryStatus, deleteCategory,getCategoryHeading,editCategoryHeading } from "../api/category";
 import Switch from "react-switch";
 import { NavLink, useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import Button from '@material-tailwind/react/Button';
 import Icon from '@material-tailwind/react/Icon';
 import Image from '@material-tailwind/react/Image';
+import { useForm } from "react-hook-form";
 
 const ManageCategory = () => {
   const history = useHistory();
   const [categoryListData, setCategoryListData] = useState([]);
-
+  const {
+    register,
+    handleSubmit,
+    setValue
+    // formState: { errors },
+    // reset,
+    // trigger,
+  } = useForm();
   const FETCH_LIST = async () => {
     let res = await categoryList();
     console.log(res.data.data);
@@ -47,7 +55,13 @@ const ManageCategory = () => {
     }
   };
 
+  const GET_CATEGORY_HEADING = async ()=>{
+   const res = await getCategoryHeading();
+   setValue('headingText',res.data.data.headingText);
+  }
+
   useEffect(() => {
+    GET_CATEGORY_HEADING();
     FETCH_LIST();
   }, []);
   const TOGGLE_STATUS = async (e, id, isActive) => {
@@ -65,6 +79,19 @@ const ManageCategory = () => {
     e.preventDefault();
     history.push(`/edit-category/${id}`);
   };
+
+  const Edit_HEADING = async (data)=>{
+       try {
+          const res = await editCategoryHeading(data);
+          if(res.ok){
+            toast.success(res.data.msg);
+          }else{
+            toast.error(res.data.msg);
+          }
+       } catch (err) {
+         console.log(err);
+       }
+  }
 
   
   const style = {
@@ -104,6 +131,27 @@ const ManageCategory = () => {
             </div>
           </CardHeader>
           <CardBody>
+          <div className="flex flex-wrap -mx-3 mb-1">
+          <form className="w-full lg:w-12/12 pr-4 mb-10" onSubmit={handleSubmit(Edit_HEADING)}>
+                  <div className="flex items-center border-b border-blue-900 py-2">
+                    <input
+                      className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                      type="text"
+                      placeholder="Enter Heading Text"
+                      aria-label="Full name"
+                      {...register("headingText")}
+                      // value={bottomText}
+                      // onChange={e=>setBottomText(e.target.value)}
+                    />
+                    <button
+                      className="flex-shrink-0 bg-blue text-sm text-white py-1 px-2 rounded"
+                      type="submit"
+                    >
+                       Submit
+                    </button>
+                  </div>
+          </form>
+          </div>
             <div className="overflow-x-auto text-right">
               <NavLink to="/add-category" className="btn blue-btn">
                 Add Category

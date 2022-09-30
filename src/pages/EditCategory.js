@@ -12,7 +12,7 @@ import { editCategory,getCategoryById } from "../api/category";
 const EditCategory = () => {
     const { id } = useParams();
     const history = useHistory();
-    const [file, setFile] = useState();
+    const [file, setFile] = useState("");
     // const [fileData,setFileData] = useState();
     // const [categoryData,setCategoryData] = useState({});
     const {

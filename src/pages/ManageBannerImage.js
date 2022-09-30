@@ -1,12 +1,12 @@
-import { forwardRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "@material-tailwind/react/Card";
 import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
 import Button from "@material-tailwind/react/Button";
 import Icon from "@material-tailwind/react/Icon";
-import Input from "@material-tailwind/react/Input";
-import Textarea from "@material-tailwind/react/Textarea";
-
+// import Input from "@material-tailwind/react/Input";
+// import Textarea from "@material-tailwind/react/Textarea";
+import Switch from "react-switch";
 import Image from "@material-tailwind/react/Image";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +17,8 @@ import {
   getBannerDetails,
   changeBannerImageStatus,
   deleteBannerImage,
-  editBannertext
+  editBannertext,
+  getBannerText
 } from "../api/bannerImage";
 import swal from "sweetalert";
 
@@ -52,13 +53,15 @@ const style = {
 
 const ManageBannerImage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedData, setSelectedData] = useState({});
+  // const [selectedData, setSelectedData] = useState({});
+  const selectedData = {};
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-    trigger,
+    setValue
+    // formState: { errors },
+    // reset,
+    // trigger,
   } = useForm();
   const OPEN_MODAL = async (e) => {
     try {
@@ -75,9 +78,12 @@ const ManageBannerImage = () => {
   const [bannerImageList, setBannerImageList] = useState([]);
   const Get_Banner_Details = async () => {
     let res = await getBannerDetails();
-    console.log(res.data.data);
-
     setBannerImageList(res.data.data);
+    let resbannerText = await getBannerText();
+    setValue('upperText',resbannerText.data.data.upperText);
+    setValue('bottomText',resbannerText.data.data.bottomText);
+
+    
   };
 
   const DELETE_ITEM = (e, id) => {
@@ -107,23 +113,18 @@ const ManageBannerImage = () => {
 
   useEffect(() => {
     Get_Banner_Details();
-  }, []);
+  },[]);
 
-  const Edit_Banner_Text = async ()=>{
+  const Edit_Banner_Text = async (data)=>{
     try {
-      // const form = document.getElementById("upper-text");
-      // const formData = new FormData(form);
-      // console.log(formData);
-      const res = await editBannertext();
+      console.log(data);
+      const res = await editBannertext(data);
       console.log(res);
       if(res.ok){
         toast.success(res.data.msg);
       }else{
         toast.error(res.data.msg)
       }
-      // addCategory
-      // const res = await addCategory(data);
-      // console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -133,7 +134,7 @@ const ManageBannerImage = () => {
     try {
       const res = await changeBannerImageStatus(
         id,
-        isActive == true ? true : false
+        isActive === true ? true : false
       );
       console.log(res.data.data);
       if (!res.ok) return toast.error(res.data.msg);
@@ -155,38 +156,36 @@ const ManageBannerImage = () => {
           </CardHeader>
           <CardBody>
             <div className="flex flex-wrap -mx-3 mb-1">
-          <form class="w-full lg:w-6/12 pr-4 mb-10" id='upper-text' onSubmit={handleSubmit(Edit_Banner_Text)}>
-                  <div class="flex items-center border-b border-teal-500 py-2">
+          <form className="w-full lg:w-6/12 pr-4 mb-10" id='upper-text' onSubmit={handleSubmit(Edit_Banner_Text)}>
+                  <div className="flex items-center border-b border-blue-900 py-2">
                     <input
-                      class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                      className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none "
                       type="text"
                       placeholder="Enter Upper Text"
                       aria-label="Full name"
-                      // {...register("upperText")}
-                      // value={upperText}
-                      // onChange={e=>setUpperText(e.target.value)}
+                      {...register("upperText")}
                     />
                     <button
-                      class="flex-shrink-0 bg-blue hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
-                      type="submit"
+                      className="flex-shrink-0 bg-blue text-sm text-white py-1 px-2 rounded"
                     >
                       Submit
                     </button>
                   </div>
           </form>
-          <form class="w-full lg:w-6/12 pr-4 mb-10">
-                  <div class="flex items-center border-b border-teal-500 py-2">
+          <form className="w-full lg:w-6/12 pr-4 mb-10" onSubmit={handleSubmit(Edit_Banner_Text)}>
+                  <div className="flex items-center border-b border-blue-900 py-2">
                     <input
-                      class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                      className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                       type="text"
                       placeholder="Enter Bottom Text"
                       aria-label="Full name"
-                      // {...register("bottomText")}
+                      {...register("bottomText")}
+                      
                       // value={bottomText}
                       // onChange={e=>setBottomText(e.target.value)}
                     />
                     <button
-                      class="flex-shrink-0 bg-blue hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+                      className="flex-shrink-0 bg-blue text-sm text-white py-1 px-2 rounded"
                       type="submit"
                     >
                        Submit
@@ -224,7 +223,7 @@ const ManageBannerImage = () => {
                     {bannerImageList.length > 0 &&
                       bannerImageList.map((ele, i) => {
                         return (
-                          <tr>
+                          <tr key={i}>
                             <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                               {i + 1}
                             </td>
@@ -239,44 +238,19 @@ const ManageBannerImage = () => {
                               </div>
                             </td>
                             <td
-                              className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left"
-                              id={`${ele._id}`}
-                            >
-                              <div className="status_details"></div>
-                              {/* <select
-                  defaultValue={ele.status}
-                  className="dropdown font-light"
-                  onChange={(e) => CHANGE_STATUS(ele._id, e.target.value)}
-                >
-                  <option value={true}>Active</option>
-                  <option
-                    value={false}
-                    selected={ele.isActive ? "" : "selected"}
-                  >
-                    Inactive
-                  </option>
-                </select> */}
-                              <label
-                                for="checked-toggle"
-                                class="inline-flex relative items-center cursor-pointer"
-                              >
-                                <input
-                                  type="checkbox"
-                                  value={ele.isActive == true ? true : false}
-                                  class="sr-only peer"
-                                  checked={ele.isActive == true ? true : false}
-                                />
-                                <div
-                                  class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
-                                  onClick={(e) =>
-                                    TOGGLE_STATUS(
-                                      e,
-                                      ele._id,
-                                      ele.isActive == true ? false : true
-                                    )
-                                  }
-                                ></div>
-                              </label>
+                            className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left"
+                            id={`${ele._id}`}
+                          >
+                            <Switch
+                              onChange={(e) =>
+                                TOGGLE_STATUS(
+                                  e,
+                                  ele._id,
+                                  ele.isActive === true ? false : true
+                                )
+                              }
+                              checked={ele.isActive === true ? true : false}
+                            />
                             </td>
                             <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                               <Button
@@ -292,20 +266,6 @@ const ManageBannerImage = () => {
                                 onClick={(e) => DELETE_ITEM(e, ele._id)}
                               >
                                 <Icon name="delete" size="2xl" />
-                              </Button>
-                              <Button
-                                color="green"
-                                buttonType="outline"
-                                size="small"
-                                rounded={false}
-                                block={false}
-                                iconOnly={false}
-                                ripple="dark"
-                                className="mr-2 float-right"
-                                style={{ cursor: "pointer" }}
-                                onClick={(e) => DELETE_ITEM(e, ele._id)}
-                              >
-                                <Icon name="edit" size="2xl" />
                               </Button>
                             </td>
                           </tr>

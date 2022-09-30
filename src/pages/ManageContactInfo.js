@@ -1,24 +1,24 @@
-import { forwardRef, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 import Button from '@material-tailwind/react/Button';
-import Icon from '@material-tailwind/react/Icon';
-import Input from '@material-tailwind/react/Input';
-import Textarea from '@material-tailwind/react/Textarea';
+// import Icon from '@material-tailwind/react/Icon';
+// import Input from '@material-tailwind/react/Input';
+// import Textarea from '@material-tailwind/react/Textarea';
 
-import Image from '@material-tailwind/react/Image';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { uploadCmsPageDetails, getCmsPage } from '../api/cms';
-import { useHistory, useParams } from 'react-router-dom';
-import Checkbox from "@material-tailwind/react/Checkbox"
-import Radio from "@material-tailwind/react/radio"
+// import Image from '@material-tailwind/react/Image';
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import { uploadCmsPageDetails, getCmsPage } from '../api/cms';
+// import { useHistory, useParams } from 'react-router-dom';
+// import Checkbox from "@material-tailwind/react/Checkbox"
+// import Radio from "@material-tailwind/react/radio"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import BasicCms from '../components/BasicCms';
-import BannerImage from 'components/BannerImage';
-import AddBannerImageModal from 'components/AddBannerImageModal';
+// import BasicCms from '../components/BasicCms';
+// import BannerImage from 'components/BannerImage';
+// import AddBannerImageModal from 'components/AddBannerImageModal';
 import Modal from "@material-tailwind/react/Modal";
 import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";

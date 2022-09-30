@@ -47,6 +47,21 @@ const AddCoupon = () => {
     const [everyPersonUsed,setEveryPersonUsed] = useState(0);
     const [discountType,setDiscountType] = useState("Flat");
     const [discountAmount,setDiscountAmount] = useState(0);
+    // const [tempStartDate, setTempStartDate] = useState(new Date());
+    const tempStartDate = new Date();
+
+    // useEffect(()=>{
+    //     setTempStartDate(`${new Date().getFullYear()}`);
+    //     console.log(tempStartDate);
+    // },[])
+
+    const startDateFun = (date) => {
+        setStartDate(date);
+      };
+    
+      const endDateFun = (date) => {
+        setEndDate(date);
+      };
     // const [isValid,setIsValid] = useState(false);
     // const [errMsgCouponName,setErrMsgCouponName] = useState("");
 
@@ -171,12 +186,12 @@ const AddCoupon = () => {
                                     onChange={e=>setDiscountAmount(e.target.value)}
                                 />
                             </div>
-                            <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                            {/* <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
                                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                             </div>
                             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
                                  <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
-                            </div>
+                            </div> */}
                             {/* <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
                              <DatePicker
       selectsRange={true}
@@ -188,6 +203,28 @@ const AddCoupon = () => {
       isClearable={true}
     />
     </div> */}
+
+<div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                    <DatePicker
+                      selected={startDate}
+                      onChange={startDateFun}
+                      selectsStart
+                      // startDate={startDate}
+                      // endDate={endDate}
+                      minDate={tempStartDate}
+                    />
+                  </div>
+                  <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
+                    <DatePicker
+                      selected={startDate}
+                      onChange={endDateFun}
+                      selectsEnd
+                      // startDate={startDate}
+                      // endDate={endDate}
+                      // minDate={startDate}
+                      minDate={startDate}
+                    />
+                  </div>
                         </div>
                         <div className='flex justify-center'>
                         <div className="w-full lg:w-4/12 pl-4 mb-10 font-light forsubmit">

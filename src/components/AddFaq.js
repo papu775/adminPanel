@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "@material-tailwind/react/Modal";
 import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
@@ -7,9 +7,9 @@ import Button from "@material-tailwind/react/Button";
 import { createFaq } from '../api/faq';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getAllFaqs,deleteFaqs,changeFaqStatus } from '../api/faq';
+import { getAllFaqs } from '../api/faq';
 
-const AddFaq = ({ showModal, setShowModal, selectedData, onChangeForm, SUBMIT, onClose }) => {
+const AddFaq = ({ showModal, setShowModal, onClose }) => {
     // const [startDate,setStartDate] = useState(new Date());
     // const [endDate,setEndDate] = useState(new Date());
     // const [couponName,setCouponName] = useState("");
@@ -28,7 +28,7 @@ const AddFaq = ({ showModal, setShowModal, selectedData, onChangeForm, SUBMIT, o
             // console.log(res);
             const res = await createFaq({ question, answer });
             console.log("------------", res.status)
-            if (res.status == 200) {
+            if (res.status === 200) {
                 getAllFaqs();
                 toast.success("Faq added successfully..")
             }
@@ -54,7 +54,30 @@ const AddFaq = ({ showModal, setShowModal, selectedData, onChangeForm, SUBMIT, o
                     <div className="from-group mb-3">
                         <label className="text-base leading-relaxed text-gray-600 font-normal">
                             Answer          </label>
-                        <textarea rows="6" onChange={e => setAnswer(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">    </textarea>
+                        {/* <textarea rows="6" onChange={e => setAnswer(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >    </textarea> */}
+                        <textarea
+      className="
+        form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+      "
+      onChange={e=>setAnswer(e.target.value)}
+      id="headerEndButtonText"
+      rows="3"
+      placeholder="Your message"
+    ></textarea>
                     </div>
 
                 </ModalBody>

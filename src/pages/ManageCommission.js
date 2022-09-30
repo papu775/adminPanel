@@ -141,7 +141,7 @@ const handelChange = (e)=>{
                                           Contributor Email
                                         </th>
                                         <th className="px-2 text-teal-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                                           Commission Amount
+                                           Commission Amount (%)
                                         </th>
                                         <th className="px-2 text-teal-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
                                           Last Update
@@ -182,12 +182,14 @@ const handelChange = (e)=>{
                           <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                             {
                             ele.CommissionDetails?
-                            `${new Date(ele.CommissionDetails.lastTime).getDay().toString()}/${new Date(ele.CommissionDetails.lastTime).getMonth().toString()}`
-                            
+                            `${new Date(ele.CommissionDetails.lastTime).getDay().toString()}/${new Date(ele.CommissionDetails.lastTime).getMonth().toString()}/${new Date(ele.CommissionDetails.lastTime).getFullYear().toString()},${new Date(ele.CommissionDetails.lastTime).getHours().toString()}:${new Date(ele.CommissionDetails.lastTime).getMinutes().toString()}`
                             :'-'}
                           </td>
                           <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                            {ele.CommissionDetails?ele.CommissionDetails.currentTime.split("T")[0]:'-'}
+                            {
+                            ele.CommissionDetails?
+                            `${new Date(ele.CommissionDetails.currentTime).getDay().toString()}/${new Date(ele.CommissionDetails.currentTime).getMonth().toString()}/${new Date(ele.CommissionDetails.currentTime).getFullYear().toString()},${new Date(ele.CommissionDetails.currentTime).getHours().toString()}:${new Date(ele.CommissionDetails.currentTime).getMinutes().toString()}`
+                            :'-'}
                           </td>
                                 <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left flex">
                 <Button

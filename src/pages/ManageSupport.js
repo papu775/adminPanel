@@ -15,6 +15,7 @@ import Icon from '@material-tailwind/react/Icon';
 import Modal from '../components/Modal'
 import Pagination from '../components/Pagination';
 import SpinnerComponent from 'components/Spinner';
+import swal from "sweetalert";
 
 toast.configure()
 
@@ -84,19 +85,25 @@ const ManageSupport = () => {
     const DELETE_ITEM = async (e, id) => {
         try {
             e.preventDefault();
-            setIsLoading(true);
-            if (!id) return console.log('Query Id Is Required!')
-            const res = await deleteSupport(id)
-            if (!res.ok) {
-                setIsLoading(false);
-                return toast.error(res.data.msg);
-            }
-            toast.success(res.data.msg);
-            FETCH_LIST()
-            setIsLoading(false);
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              }).then(async (willDelete) => {
+                if (willDelete) {
+                if (!id) return console.log('Query Id Is Required!')
+                const res = await deleteSupport(id)
+                if (!res.ok) {
+                    return toast.error(res.data.msg);
+                }
+                toast.success(res.data.msg);
+                FETCH_LIST()
+                }
+              });
         } catch (err) {
             console.log(err)
-            setIsLoading(false);
         }
     }
 
@@ -111,9 +118,14 @@ const ManageSupport = () => {
     const SEND_EMAIL = async (e, id, emailData, selectedData) => {
         try {
             e.preventDefault()
+            let a = localStorage.getItem('lethustock-admin-data');
+            console.log(JSON.parse(a));
             setIsLoading(true);
             const res = await sendEmail({
+                id:selectedData._id,
+                name:selectedData.name,
                 email: selectedData.email,
+                phone:selectedData.phone,
                 subject: emailData.subject || 'Lethustock Contact Us',
                 message: emailData.message
             })

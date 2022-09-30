@@ -18,6 +18,7 @@ export default function RegularModal({ showModal, setShowModal, selectedData, on
                         <p className="text-base leading-relaxed text-gray-600 font-normal">
                             Message
                         </p>
+                        
                         <textarea
                             name="message"
                             style={{

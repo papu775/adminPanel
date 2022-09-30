@@ -132,7 +132,7 @@ const Edit_Royalty = async (e)=>{
         </CardBody>
       </Card>
     </div>
-  </>
+    </>
   )
 }
 
