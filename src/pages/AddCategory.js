@@ -157,7 +157,7 @@ const AddCategory = () => {
                       {...register("image", {
                         required: "Image Is Required! ",
                       })}
-                      onKeyUp={() => {
+                       onChang={() => {
                         trigger("image");
                       }}
                       onChange={handleChange}

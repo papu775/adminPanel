@@ -6,9 +6,16 @@ import Button from '@material-tailwind/react/Button';
 import Icon from '@material-tailwind/react/Icon';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Modal from "@material-tailwind/react/Modal";
+import ModalHeader from "@material-tailwind/react/ModalHeader";
+import ModalBody from "@material-tailwind/react/ModalBody";
+import ModalFooter from "@material-tailwind/react/ModalFooter";
+
 // import AddFaq from 'components/AddFaq';
 import {useHistory} from 'react-router-dom';
-import { customerList,changeCustomerListStatus } from '../api/customer';
+import { customerList,changeCustomerListStatus,reasonOfBlock } from '../api/customer';
+import { getuser } from "../api/user";
+
 import Switch from "react-switch";
 // import Modal from "@material-tailwind/react/Modal";
 // import ModalHeader from "@material-tailwind/react/ModalHeader";
@@ -46,9 +53,11 @@ const style = {
 };
 
 const ManageCustomer = () => {
+  const [showModal,setShowModal] = useState(false);
+  const [selectedData, setSelectedData] = useState({});
   const history = useHistory();
   const [customerAllList,setCustomerAllList] = useState([]);
-
+  const [message,setMessage] = useState("You are blocked !");
   const FETCH_LIST = async () => {
     let res = await customerList();
     setCustomerAllList(res.data.data);
@@ -56,9 +65,11 @@ const ManageCustomer = () => {
 
   const TOGGLE_STATUS = async (e, id, isActive) => {
     try {
-      
+         
+         const resGetUserById = await getuser(id);
+        const resSendEmail = await reasonOfBlock({email:resGetUserById.data.data.email,message:message,fullName:resGetUserById.data.data.fullName,phone:resGetUserById.data.data.phoneNumber});
+        console.log(resSendEmail);
         const res = await changeCustomerListStatus(id, isActive === true ? true : false);
-        console.log(isActive);
         if (!res.ok) return toast.error(res.data.msg);
         toast.success(res.data.msg);
         FETCH_LIST();
@@ -76,6 +87,18 @@ const ManageCustomer = () => {
     e.preventDefault();
     history.push(`/view-user/${id}`);
   };
+//   const onChangeForm = (e) => {
+//     let form = {
+//         ...emailData,
+//         [e.target.name]: e.target.value
+//     }
+//     setEmailData(form)
+// }
+  const onClose = () => {
+    setShowModal(false);
+    setSelectedData({});
+    document.getElementById('message-textarea').value = '';
+}
 
   return (
     <>
@@ -147,26 +170,6 @@ const ManageCustomer = () => {
               <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                 {ele.createdAt.split("T")[0]}
               </td>
-              {/* <td
-                className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left"
-                id={`${ele._id}`}
-              >
-                <div className="status_details">
-                </div>
-                <label
-                  for="checked-toggle"
-                  class="inline-flex relative items-center cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    value={ele.isActive === true ? true:false}
-                    class="sr-only peer"
-                    checked={ele.isActive === true ? true:false}
-                    
-                  />
-                  <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" onClick={e => TOGGLE_STATUS(e, ele._id, ele.isActive === true ? false:true)}></div>
-                </label>
-              </td> */}
                 <td
                             className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left"
                             id={`${ele._id}`}
@@ -209,6 +212,56 @@ const ManageCustomer = () => {
         </CardBody>
       </Card>
     </div>
+
+    <Modal size="lg" active={showModal} toggler={() => setShowModal(false)} >
+                <ModalHeader toggler={() => setShowModal(false)}>
+                    Send Email
+                </ModalHeader>
+                <ModalBody>
+                    <div>
+                        <p className="text-base leading-relaxed text-gray-600 font-normal">
+                            Reson of block
+                        </p>
+                        <textarea
+                            id='message-textarea'
+                            name="message"
+                            style={{
+                                width: "100%",
+                                height: 120,
+                                backgroundColor: '#ccc',
+                                padding: 5,
+                                borderRadius: 5,
+                                marginTop: 5,
+                                outlineWidth: 2
+                            }}
+                            onFocus={e => e.target.style.outlineColor = 'green'}
+                            onMouseOut={e => e.target.style.outlineColor = 'none'}
+                            // onChangeCapture={(e) => onChangeForm(e)}
+                        ></textarea>
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <Button
+                        color="red"
+                        buttonType="link"
+                        onClick={onClose}
+                        ripple="dark"
+                    >
+                        Close
+                    </Button>
+
+                    {/* <Button
+                        color="green"
+                        onClick={(e) => {
+                            SUBMIT(e)
+                            setShowModal(false)
+                        }}
+                        ripple="light"
+                    >
+                        Send
+                    </Button> */}
+                </ModalFooter>
+            </Modal>
   </>
   )
 }

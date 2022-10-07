@@ -8,7 +8,7 @@ const getAllFaqs = () => client.get(`/admin/cms/getFaq`)
 
 const deleteFaqs = (id) =>client.delete(`/admin/cms/deleteFaq/${id}`)
 
-const getFaq = (id) =>client.get(`/admin/cms/getfaq/${id}`)
+const getFaqById = (id) =>client.get(`/admin/cms/getfaq/${id}`)
 const editFaq = (id, data) => client.post(`/admin/cms/editFaq/${id}`, data);
 
 const changeFaqStatus = (id, status) => client.patch(`/admin/cms/changeFaqStatus/${id}/${status}`, {})
@@ -19,7 +19,7 @@ export {
     updateFaq,
     getAllFaqs,
     deleteFaqs,
-    getFaq,
+    getFaqById,
     editFaq,
     changeFaqStatus
 }

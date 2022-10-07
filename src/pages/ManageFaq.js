@@ -6,7 +6,7 @@ import Button from "@material-tailwind/react/Button";
 import Icon from "@material-tailwind/react/Icon";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getAllFaqs, deleteFaqs, changeFaqStatus } from "../api/faq";
+import { getAllFaqs, deleteFaqs, changeFaqStatus,getFaqById,editFaq} from "../api/faq";
 
 import Modal from "@material-tailwind/react/Modal";
 import ModalHeader from "@material-tailwind/react/ModalHeader";
@@ -22,6 +22,8 @@ toast.configure();
 const ManageFaq = () => {
   const [showModal, setShowModal] = useState(false);
   const [getAllFaq, setGetAllFaq] = useState([]);
+  const [faqOperationOption,setFaqOperationOption] = useState(true);
+  const [faqId,setFaqId] = useState("");
   // const [question, setQuestion] = useState("");
   // const [answer, setAnswer] = useState("");
 
@@ -48,6 +50,7 @@ const ManageFaq = () => {
       e.preventDefault();
       setShowModal(true);
       setValue('answer','');
+      setValue('question','');
     } catch (err) {
       console.log(err);
     }
@@ -107,10 +110,32 @@ const ManageFaq = () => {
       console.log(error);
     }
   };
-  // const EDIT_FAQ = async (e, id) => {
-  //   e.preventDefault();
-  //   history.push(`/edit-faq/${id}`);
-  // };
+  const SHOW_FAQ_BY_ID = async (e, id) => {
+    e.preventDefault();
+    setShowModal(true);
+    setFaqOperationOption(false);
+    setFaqId(id);
+    const res = await getFaqById(id);
+    setValue("question",res.data.data.question);
+    setValue("answer",res.data.data.answer);
+  };
+  const EDIT_FAQ = async (data)=>{
+    try {
+      console.log(data);
+      setFaqOperationOption(true);
+      const res = await editFaq(faqId,data);
+      if(res.ok){
+        setShowModal(false);
+        FETCH_FAQ();
+        reset();
+        toast.success(res.data.msg);
+      }else{
+        toast.error(res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <>
       <div className="bg-white px-3 md:px-8 h-40" />
@@ -159,26 +184,6 @@ const ManageFaq = () => {
                         <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                           {ele.answer}
                         </td>
-                        {/* <td
-                className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left"
-                id={`${ele._id}`}
-              >
-                <div className="status_details">
-                </div>
-                <label
-                  htmlFor="checked-toggle"
-                  className="inline-flex relative items-center cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    value={ele.isActive === true ? true:false}
-                    className="sr-only peer"
-                    checked={ele.isActive === true ? true:false}
-                    
-                  />
-                  <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" onClick={e => TOGGLE_STATUS(e, ele._id, ele.isActive === true ? false:true)}></div>
-                </label>
-                        </td> */}
                         <td
                           className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left"
                           id={`${ele._id}`}
@@ -205,7 +210,7 @@ const ManageFaq = () => {
                             ripple="dark"
                             className=""
                             style={{ cursor: "pointer" }}
-                            // onClick={(e) => EDIT_FAQ(e, item._id)}
+                            onClick={(e) => SHOW_FAQ_BY_ID(e, ele._id)}
                           >
                             <Icon name="edit" size="2xl" />
                           </Button>
@@ -239,8 +244,8 @@ const ManageFaq = () => {
         onClose={onClose}
       /> */}
       <Modal size="lg" active={showModal} toggler={() => setShowModal(false)}>
-        <form onSubmit={handleSubmit(ADD_FAQ)}>
-          <ModalHeader toggler={() => setShowModal(false)}>Add Faq</ModalHeader>
+          <ModalHeader toggler={() => setShowModal(false)}> Manage Faq</ModalHeader>
+          <form onSubmit={handleSubmit(faqOperationOption?ADD_FAQ:EDIT_FAQ)}>
           <ModalBody>
             <div className="from-group mb-3">
               <label className="text-base leading-relaxed text-gray-600 font-normal">
@@ -289,6 +294,7 @@ const ManageFaq = () => {
               buttonType="link"
               onClick={onClose}
               ripple="dark"
+              type="button"
             >
               Close
             </Button>

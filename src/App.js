@@ -38,6 +38,7 @@ import ManageSocalMedia from 'pages/ManageSocalMedia';
 import ViewImage from 'pages/ViewImage';
 import ShowUserById from 'pages/ShowUserById';
 import ItemDetails from 'pages/ItemDetails';
+import LicenseInformation from 'pages/LicenseInformation';
 // import ForgotPassword from 'pages/forgotPassword';
 // import ManageSupport from 'pages/ManageSupport';
 
@@ -201,6 +202,10 @@ function App() {
                     <Route exact path="/item-details/:id">
                         <Sidebar admin={admin} />
                         <ItemDetails />
+                    </Route>
+                    <Route exact path="/license-information">
+                        <Sidebar admin={admin} />
+                        <LicenseInformation />
                     </Route>
                     <Redirect from="*" to="/" />
                 </Switch>

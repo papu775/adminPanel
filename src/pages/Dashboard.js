@@ -1,6 +1,21 @@
 import StatusCard from "components/StatusCard";
+import { useEffect, useState } from "react";
+import { countUser } from '../api/dashboard';
 
 export default function Dashboard() {
+  const [customerType,setCustomerType] = useState("");
+  const [contributorType,setContributorType] = useState("");
+  const [countContributor,setCountContributor] = useState("");
+  const [countCustomer,setCountCustomer] = useState("");
+   useEffect(async ()=>{
+
+     const res = await countUser();
+      setCustomerType(res.data.data[0]._id);
+      setCountCustomer(res.data.data[0].count)
+      setContributorType(res.data.data[1]._id);
+      setCountContributor(res.data.data[1].count)
+   },[])
+
   return (
     <>
       {/* <div className="bg-light-blue-500 pt-14 pb-28 px-3 md:px-8 h-auto">
@@ -46,25 +61,17 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 mb-4">
             {
               <>
-                <StatusCard
-                  color="red"
-                  icon="groups"
-                  title="Contributor"
-                  amount="350,897"
-                  percentage="3.48"
-                  percentageIcon="arrow_upward"
-                  percentageColor="green"
-                  date="No. of Contributor"
-                />
+              {/* {res.length }
+             
                 <StatusCard
                   color="orange"
                   icon="groups"
                   title="Customer"
                   amount="2,356"
-                  percentage="3.48"
+                  percentage={res.data.data[1]._id}
                   percentageIcon="arrow_downward"
                   percentageColor="red"
-                  date="No. of Customer"
+                  date={res.data.data[1].count}
                 />
                 <StatusCard
                   color="green"
@@ -75,28 +82,35 @@ export default function Dashboard() {
                   percentageIcon="arrow_downward"
                   percentageColor="orange"
                   date="No. of Subscriber"
-                />
+                /> */}
                 {/* <StatusCard
                         color="blue"
                         icon="groups"
                         amount={87}
                         percentageColor="green"
                         date="No. of Contributor"
-                    />
+                    /> */}
                     <StatusCard
                         color="orange"
                         icon="groups"
-                        amount={98}
+                        percentage={countCustomer}
                         percentageColor="green"
-                        date="No. of Customer"
+                        date={customerType}
                     />
                     <StatusCard
                         color="green"
                         icon="groups"
-                        amount={98}
+                        percentage={countContributor}
                         percentageColor="green"
-                        date="No. of Subscriber"
-                    /> */}
+                        date={contributorType}
+                    />
+                    <StatusCard
+                        color="blue"
+                        icon="groups"
+                        percentage="1"
+                        percentageColor="green"
+                        date="Subscriber"
+                    />
               </>
             }
           </div>

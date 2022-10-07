@@ -388,7 +388,7 @@ export default function Sidebar({ admin }) {
                                 <NavLink
                                     to="/license-information"
                                     className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    activeClassName="bg-orange-900  text-white shadow-md active"
+                                    activeClassName="bg-org-doc bg-orange-900  text-white shadow-md active"
                                 >
                                     <Icon name="info" size="2xl" />
                                     License information
